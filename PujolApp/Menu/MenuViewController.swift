@@ -14,12 +14,13 @@ class MenuViewController: UIViewController { //hereda de UIViewController
     var width = UIScreen.main.bounds.width
     var height = UIScreen.main.bounds.height
     var dataSource : MenuObject?
-
+    
+    var backgroundColor = UIColor(displayP3Red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .red
+        view.backgroundColor = backgroundColor
         getData() //se llama la función getData, lo que contiene el menu
         initUI() // se llama la función initUI
     }
@@ -27,7 +28,7 @@ class MenuViewController: UIViewController { //hereda de UIViewController
     
     func initUI(){
         tableView = UITableView(frame: CGRect(x: 10, y: 20, width: width - 20, height: height - 100))
-        tableView?.backgroundColor = .orange
+        tableView?.backgroundColor = backgroundColor
         tableView?.delegate = self
         tableView?.dataSource = self //en donde se va a definir (en si mismo)
         view.addSubview(tableView!) //se hace visible
@@ -105,11 +106,12 @@ extension MenuViewController : UITableViewDelegate{
     func tableView(_ tableView: UITableView, titleForHeaderInSection section:Int) -> String?{
         return dataSource?.categorias?[section].nombre ?? ""
     }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView() //aqui definimos el UIView el cual se va a retornar en la funcion
         let color = UIColor(displayP3Red: .random(in: 0...1), green: .random(in: 0...1), blue: .random(in: 0...1), alpha: 1)
         //creamos una costante color en la cual define colores random
-        view.backgroundColor = color  //lo agregamos a la vista
+        view.backgroundColor = backgroundColor  //lo agregamos a la vista
         
         
         let image = UIImageView(frame: CGRect(x: 2, y: 2, width: 20, height: 20)) //declaramos imagen
@@ -119,6 +121,7 @@ extension MenuViewController : UITableViewDelegate{
         //ae declara el label
         let label = UILabel(frame: CGRect(x: 25, y: 2, width: 100, height: 20))
         label.text = dataSource?.categorias?[section].nombre ?? ""
+        label.font = .boldSystemFont(ofSize: 20)
         view.addSubview(label)
         
         return view
@@ -148,5 +151,9 @@ extension MenuViewController : UITableViewDelegate{
         let cell = MenuTableViewCell(producto: product!)
         return cell
     }
+    
+        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return height/6
+        }
 
 }
