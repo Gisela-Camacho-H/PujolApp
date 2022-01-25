@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		563B8D5527990ED300C8123D /* DetailProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563B8D5427990ED300C8123D /* DetailProductViewController.swift */; };
 		563C7E412796543400C1D97A /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563C7E402796543400C1D97A /* MenuTableViewCell.swift */; };
+		56A774CF279A59A900A98114 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A774CE279A59A900A98114 /* Utils.swift */; };
+		56F6DEA2279F8CC9005B05B5 /* InventarioCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F6DEA1279F8CC9005B05B5 /* InventarioCollectionCell.swift */; };
 		BF176EF027910F2D0001DA34 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF176EEF27910F2D0001DA34 /* AppDelegate.swift */; };
 		BF176EF227910F2D0001DA34 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF176EF127910F2D0001DA34 /* SceneDelegate.swift */; };
 		BF176EF427910F2D0001DA34 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF176EF327910F2D0001DA34 /* ViewController.swift */; };
@@ -22,7 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		563B8D5427990ED300C8123D /* DetailProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProductViewController.swift; sourceTree = "<group>"; };
 		563C7E402796543400C1D97A /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		56A774CE279A59A900A98114 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		56F6DEA1279F8CC9005B05B5 /* InventarioCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventarioCollectionCell.swift; sourceTree = "<group>"; };
 		BF176EEC27910F2D0001DA34 /* PujolApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PujolApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF176EEF27910F2D0001DA34 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF176EF127910F2D0001DA34 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +55,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		563B8D5127990D4800C8123D /* Detail Product */ = {
+			isa = PBXGroup;
+			children = (
+				563B8D5427990ED300C8123D /* DetailProductViewController.swift */,
+			);
+			path = "Detail Product";
+			sourceTree = "<group>";
+		};
 		563C7E3F2796541800C1D97A /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -57,9 +71,26 @@
 			path = SubViews;
 			sourceTree = "<group>";
 		};
+		56A774CD279A599200A98114 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				56A774CE279A59A900A98114 /* Utils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		56F6DEA3279F8D35005B05B5 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				56F6DEA1279F8CC9005B05B5 /* InventarioCollectionCell.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
 		BF176EE327910F2D0001DA34 = {
 			isa = PBXGroup;
 			children = (
+				56A774CD279A599200A98114 /* Utils */,
 				BF176EEE27910F2D0001DA34 /* PujolApp */,
 				BF176EED27910F2D0001DA34 /* Products */,
 			);
@@ -78,6 +109,7 @@
 			children = (
 				BF176F0D279259D30001DA34 /* Pedido */,
 				BF176F0C279259C70001DA34 /* Inventario */,
+				BF176F0727912B300001DA34 /* InventarioViewController.swift */,
 				BF176F0B279259BB0001DA34 /* Menu */,
 				BF176EEF27910F2D0001DA34 /* AppDelegate.swift */,
 				BF176F03279112840001DA34 /* RestaurantOptionView.swift */,
@@ -94,6 +126,7 @@
 		BF176F0B279259BB0001DA34 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				563B8D5127990D4800C8123D /* Detail Product */,
 				563C7E3F2796541800C1D97A /* SubViews */,
 				BF176F0527912B000001DA34 /* MenuViewController.swift */,
 				BF176F0E27925AA10001DA34 /* MenuObject.swift */,
@@ -104,7 +137,7 @@
 		BF176F0C279259C70001DA34 /* Inventario */ = {
 			isa = PBXGroup;
 			children = (
-				BF176F0727912B300001DA34 /* InventarioViewController.swift */,
+				56F6DEA3279F8D35005B05B5 /* SubViews */,
 			);
 			path = Inventario;
 			sourceTree = "<group>";
@@ -188,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56F6DEA2279F8CC9005B05B5 /* InventarioCollectionCell.swift in Sources */,
 				BF176EF427910F2D0001DA34 /* ViewController.swift in Sources */,
 				BF176F0A27912B550001DA34 /* PedidoViewController.swift in Sources */,
 				BF176F0627912B000001DA34 /* MenuViewController.swift in Sources */,
@@ -195,8 +229,10 @@
 				BF176F04279112840001DA34 /* RestaurantOptionView.swift in Sources */,
 				563C7E412796543400C1D97A /* MenuTableViewCell.swift in Sources */,
 				BF176EF227910F2D0001DA34 /* SceneDelegate.swift in Sources */,
+				56A774CF279A59A900A98114 /* Utils.swift in Sources */,
 				BF176F0827912B300001DA34 /* InventarioViewController.swift in Sources */,
 				BF176F0F27925AA10001DA34 /* MenuObject.swift in Sources */,
+				563B8D5527990ED300C8123D /* DetailProductViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +384,7 @@
 				DEVELOPMENT_TEAM = WX5VZS4884;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PujolApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PujolAppLast;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -376,6 +413,7 @@
 				DEVELOPMENT_TEAM = WX5VZS4884;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PujolApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PujolAppLast;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

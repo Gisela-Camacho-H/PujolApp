@@ -1,5 +1,5 @@
 //
-//  MenuViewController.swift
+//  InventarioViewController.swift
 //  PujolApp
 //
 //  Created by Teki on 13/01/22.
@@ -7,34 +7,49 @@
 
 import UIKit
 
-class MenuViewController: UIViewController { //hereda de UIViewController
-    
-    var tableView : UITableView?
-    
+class InventarioViewController: UIViewController {
+
+    var dataSource : MenuObject?
     var width = UIScreen.main.bounds.width
     var height = UIScreen.main.bounds.height
-    var dataSource : MenuObject?
+    var inventarioCollectionView: UICollectionView = { //ponemos el nombre de la var y lo igualamos a {}()
     
-    var backgroundColor = UIColor(displayP3Red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
-
+        let layout = UICollectionViewFlowLayout() //Declaramos un layout el cual nos servirá para definir los atributos del collectionView
+        layout.scrollDirection = .horizontal //aqui definimos el tipo de scroll que tendrá el collection
+        layout.minimumLineSpacing = 20
+        layout.minimumInteritemSpacing = 20
+        
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.register(InventarioCollectionCell.self, forCellWithReuseIdentifier: "cell")
+        collection.isPagingEnabled = true
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        collection.backgroundColor = .white
+        collection.showsVerticalScrollIndicator = true
+        collection.showsHorizontalScrollIndicator = true
+        
+        return collection //Debemos retornar un valor del tipo del cual estamos declarando
+    }()
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = backgroundColor
-        getData() //se llama la función getData, lo que contiene el menu
-        initUI() // se llama la función initUI
+        view.backgroundColor = .darkGray
+        
+        initUI()
+        
+        getData()
     }
-    
     
     func initUI(){
-        tableView = UITableView(frame: CGRect(x: 10, y: 20, width: width - 20, height: height - 100))
-        tableView?.backgroundColor = backgroundColor
-        tableView?.delegate = self
-        tableView?.dataSource = self //en donde se va a definir (en si mismo)
-        view.addSubview(tableView!) //se hace visible
+        inventarioCollectionView.delegate = self
+        inventarioCollectionView.dataSource = self
+        view.addSubview(inventarioCollectionView)
+        inventarioCollectionView.addAnchorsAndSize(width: nil, height: height/4 + 10, left: 0, top: 20, right: 20, bottom: nil)
         
     }
-    
     func getData(){
         
         // MARK: - Bebidas
@@ -96,72 +111,33 @@ class MenuViewController: UIViewController { //hereda de UIViewController
         let menu = MenuObject(categorias: [desayuno,comida,cena,postre,bebidas,alcohol], title: "Menu Pujol")
         
         dataSource = menu
-    }
-    
-}
-// MARK: - UITableViewDelegate
-extension MenuViewController : UITableViewDelegate{
-    
-    // definir el texto o view en los headers de las secciones
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section:Int) -> String?{
-        return dataSource?.categorias?[section].nombre ?? ""
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView() //aqui definimos el UIView el cual se va a retornar en la funcion
-        //let color = UIColor(displayP3Red: .random(in: 0...1), green: .random(in: 0...1), blue: .random(in: 0...1), alpha: 1)
-        //creamos una costante color en la cual define colores random
-        view.backgroundColor = backgroundColor //lo agregamos a la vista
         
-        
-        let image = UIImageView(frame: CGRect(x: 2, y: 2, width: 20, height: 20)) //declaramos imagen
-        image.image = UIImage(named: "menu") //asigna imagen
-        view.addSubview(image) //se agrega a la vista
-        
-        //ae declara el label
-        let label = UILabel(frame: CGRect(x: 25, y: 2, width: 100, height: 20))
-        label.text = dataSource?.categorias?[section].nombre ?? ""
-        label.font = .boldSystemFont(ofSize: 20)
-        view.addSubview(label)
-        
-        return view
-    }
-    
-    
-    // muestra la sección y la celda por sección donde se da click
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Estoy en la sección \(indexPath.section) en la celda \(indexPath.row)")
-        
-        let producto = dataSource?.categorias?[indexPath.section].productos?[indexPath.row]
-        
-        let vc = DetailProductViewController(producto: producto!)
-        //vc.product = producto
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true, completion: nil)
-        
-    }
-    // numero de secciones que vamos a usar
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return dataSource?.categorias?.count ?? 0
+        inventarioCollectionView.reloadData()
     }
     
 }
 
-
-    extension MenuViewController : UITableViewDataSource{
-    // numero de celdas por cada secciones que tiene cada categoria
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension InventarioViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource?.categorias?[section].productos?.count ?? 0
-  }
-    //tipo de celda que se mostrara
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let product = dataSource?.categorias?[indexPath.section].productos?[indexPath.row]
-        let cell = MenuTableViewCell(producto: product!)
-        return cell
     }
     
-        func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return height/4
-        }
-
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 6
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
+    let cell = inventarioCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! InventarioCollectionCell
+        let producto = dataSource?.categorias?[indexPath.section].productos?[indexPath.item]
+        cell.setData(producto: producto!)
+        
+    return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+        
+        
+        //return CGSize(width: width/2 - 40, height: height / 4)
+        return ((indexPath.item % 2)  != 0 ) ? CGSize(width: width/2 - 40, height: height / 4) : CGSize(width: width/2 - 40, height: height / 5)
+    }
 }
